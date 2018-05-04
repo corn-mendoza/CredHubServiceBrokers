@@ -119,7 +119,7 @@ namespace MSSqlSecureBroker.Controllers
         }
 
         // DELETE v2/unbind
-        [HttpPost("Unbind")]
+        [HttpDelete("Unbind")]
         public void Unbind([FromBody]string value)
         {
             if (_credHub != null)
