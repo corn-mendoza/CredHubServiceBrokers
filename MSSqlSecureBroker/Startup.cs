@@ -14,6 +14,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Security.DataProtection.CredHubCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace MSSqlSecureBroker
 {
@@ -37,6 +38,10 @@ namespace MSSqlSecureBroker
 
             services.AddMvc();
             services.AddCredHubClient(Configuration, logFactory);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = ".NET Service Broker for MSSQL", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +52,11 @@ namespace MSSqlSecureBroker
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NET Service Broker for MSSQL V1");
+            });
             app.UseMvc();
         }
     }
