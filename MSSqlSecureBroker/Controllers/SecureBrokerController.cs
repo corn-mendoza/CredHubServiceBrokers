@@ -72,40 +72,53 @@ namespace MSSqlSecureBroker.Controllers
             return (allServices);
         }
 
-        // POST v2/provision
-        [HttpPost("Provision")]
-        public void Provision([FromBody]string value)
+        // GET v2/lastOperation
+        [HttpGet("LastOperation")]
+        public LastOperation LastOperation([FromBody]string value)
+        {
+            return new LastOperation() { LastOperationState = "succeeded", Description = "succeeded" };
+        }
+
+        // PUT v2/provision
+        [HttpPut("Provision")]
+        public ProvisionedServiceSpec Provision([FromBody]string value)
         {
             if (_credHub != null)
             {
                 dynamic provisionData = value;
 
             }
+
+            return new ProvisionedServiceSpec();
         }
 
-        // POST v2/deprovision
-        [HttpPost("Deprovision")]
-        public void Deprovision([FromBody]string value)
+        // DELETE v2/deprovision
+        [HttpDelete("Deprovision")]
+        public DeprovisionServiceSpec Deprovision([FromBody]string value)
         {
             if (_credHub != null)
             {
                 dynamic deprovisionData = value;
 
             }
+
+            return new DeprovisionServiceSpec();
         }
 
-        // POST v2/bind
-        [HttpPost("Bind")]
-        public void Bind([FromBody]string value)
+        // PUT v2/bind
+        [HttpPut("Bind")]
+        public Binding Bind([FromBody]string value)
         {
             if (_credHub != null)
             {
                 dynamic bindData = value;
 
             }
+
+            return new Binding();
         }
 
-        // POST v2/unbind
+        // DELETE v2/unbind
         [HttpPost("Unbind")]
         public void Unbind([FromBody]string value)
         {
